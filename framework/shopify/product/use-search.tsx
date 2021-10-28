@@ -40,6 +40,7 @@ export const handler: SWRHook<SearchProductsHook> = {
 
     // change the query to getCollectionProductsQuery when categoryId is set
     if (categoryId) {
+      // clear if categoryId is set
       const data = await fetch<
         CollectionEdge,
         GetProductsFromCollectionQueryVariables

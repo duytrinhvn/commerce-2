@@ -4,6 +4,7 @@ import getSlug from './get-slug'
 export function useSearchMeta(asPath: string) {
   const [pathname, setPathname] = useState<string>('/search')
   const [category, setCategory] = useState<string | undefined>()
+  const [collection, setCollection] = useState<string | undefined>()
   const [brand, setBrand] = useState<string | undefined>()
 
   useEffect(() => {
@@ -11,19 +12,28 @@ export function useSearchMeta(asPath: string) {
     const path = asPath.split('?')[0]
     const parts = path.split('/')
 
-    let c = parts[2]
-    let b = parts[3]
-
-    if (c === 'designers') {
-      c = parts[4]
+    if(parts[2] === 'collections') {
+      setCategory(undefined)
+      let type = parts[3]
+      if(type !== '') setCollection(type)
     }
+    else {
+      setCollection(undefined)
+      let c = parts[2]
+      let b = parts[3]
 
-    if (path !== pathname) setPathname(path)
-    if (c !== category) setCategory(c)
-    if (b !== brand) setBrand(b)
-  }, [asPath, pathname, category, brand])
+      if (c === 'designers') {
+        c = parts[4]
+      } else {
+        if (c !== category) setCategory(c)
+        if (b !== brand) setBrand(b)
+      }
 
-  return { pathname, category, brand }
+      if (path !== pathname) setPathname(path)
+    }
+  }, [asPath, pathname, category, brand, collection])
+
+  return { pathname, category, brand, collection }
 }
 
 // Removes empty query parameters from the query object
