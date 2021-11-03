@@ -2,7 +2,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 import s from './ProductView.module.css'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import type { Product } from '@commerce/types/product'
 import usePrice from '@framework/product/use-price'
 import { WishlistButton } from '@components/wishlist'
@@ -16,11 +16,19 @@ interface ProductViewProps {
 }
 
 const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
+  const [productPrice, setProductPrice] = useState<string>()
+
   const { price } = usePrice({
     amount: product.price.value,
     baseAmount: product.price.retailPrice,
     currencyCode: product.price.currencyCode!,
   })
+
+  const dollarSign = ( product.price?.currencyCode === 'USD' || product.price?.currencyCode === 'CAD' ) ? '$' : '' 
+
+  useEffect(() => {
+    setProductPrice(price)
+  }, [price])
 
   return (
     <>
@@ -29,7 +37,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
           <div className={cn(s.main, 'fit')}>
             <ProductTag
               name={product.name}
-              price={`${price} ${product.price?.currencyCode}`}
+              price={`${dollarSign}${productPrice} ${product.price?.currencyCode}`}
               fontSize={32}
             />
             <div className={s.sliderContainer}>
@@ -58,13 +66,18 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
             )}
           </div>
 
-          <ProductSidebar key={product.id} product={product} className={s.sidebar} />
+          <ProductSidebar
+            key={product.id}
+            product={product}
+            setProductPrice={setProductPrice}
+            className={s.sidebar}
+          />
         </div>
         <hr className="mt-7 border-accent-2" />
         <section className="py-12 px-6 mb-10">
           <Text variant="sectionHeading">Related Products</Text>
           <div className={s.relatedProductsGrid}>
-            {relatedProducts.map((p) => (
+            {relatedProducts.map(p => (
               <div
                 key={p.path}
                 className="animated fadeIn bg-accent-0 border border-accent-2"
@@ -77,7 +90,7 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
                   className="animated fadeIn"
                   imgProps={{
                     width: 300,
-                    height: 300,
+                    height: 300
                   }}
                 />
               </div>
@@ -97,9 +110,9 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
               url: product.images[0]?.url!,
               width: 800,
               height: 600,
-              alt: product.name,
-            },
-          ],
+              alt: product.name
+            }
+          ]
         }}
       />
     </>
