@@ -31,7 +31,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({
     selectDefaultOptionFromProduct(product, setSelectedOptions)
   }, [product])
 
-  const variant = getProductVariant(product, selectedOptions)
+  const variant: any = getProductVariant(product, selectedOptions)
 
   const price = variant?.listPrice
 
