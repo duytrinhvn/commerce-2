@@ -96,7 +96,7 @@ const ProductCard: FC<Props> = ({
         )}
 
         {variant === 'default' && (
-          <>
+          <div className="">
             {process.env.COMMERCE_WISHLIST_ENABLED && (
               <WishlistButton
                 className={s.wishlistButton}
@@ -122,7 +122,7 @@ const ProductCard: FC<Props> = ({
                 />
               )}
             </div>
-          </>
+          </div>
         )}
       </a>
     </Link>

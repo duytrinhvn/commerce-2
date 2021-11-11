@@ -1,23 +1,23 @@
 module.exports = {
   future: {
     purgeLayersByDefault: true,
-    applyComplexClasses: true,
+    applyComplexClasses: true
   },
   purge: {
     content: [
       './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
+      './components/**/*.{js,ts,jsx,tsx}'
     ],
     options: {
       safelist: {
-        standard: ['outline-none'],
-      },
-    },
+        standard: ['outline-none']
+      }
+    }
   },
   theme: {
     extend: {
       maxWidth: {
-        '8xl': '1920px',
+        '8xl': '1920px'
       },
       colors: {
         primary: 'var(--primary)',
@@ -45,24 +45,29 @@ module.exports = {
         cyan: 'var(--cyan)',
         blue: 'var(--blue)',
         green: 'var(--green)',
-        red: 'var(--red)',
+        red: 'var(--red)'
       },
       textColor: {
         base: 'var(--text-base)',
         primary: 'var(--text-primary)',
-        secondary: 'var(--text-secondary)',
+        secondary: 'var(--text-secondary)'
       },
       boxShadow: {
         'outline-normal': '0 0 0 2px var(--accent-2)',
         magical:
-          'rgba(0, 0, 0, 0.02) 0px 30px 30px, rgba(0, 0, 0, 0.03) 0px 0px 8px, rgba(0, 0, 0, 0.05) 0px 1px 0px',
+          'rgba(0, 0, 0, 0.02) 0px 30px 30px, rgba(0, 0, 0, 0.03) 0px 0px 8px, rgba(0, 0, 0, 0.05) 0px 1px 0px'
       },
       lineHeight: {
-        'extra-loose': '2.2',
+        'extra-loose': '2.2'
       },
       scale: {
-        120: '1.2',
+        120: '1.2'
       },
-    },
-  },
+      height: {
+        '40vh': '40vh',
+        '60vh': '60vh',
+        '80vh': '80vh'
+      }
+    }
+  }
 }

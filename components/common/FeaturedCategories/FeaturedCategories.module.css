@@ -1,0 +1,48 @@
+.featuredCategories {
+    @apply tracking-widest mt-10 flex flex-col h-60vh md:h-40vh md:flex-row md:px-20 lg:px-44 justify-center;
+    align-items: center;
+    min-height: 50vh;
+}
+
+.category {
+    @apply relative flex flex-col w-4/6 mb-10 md:w-2/6 md:my-24;
+    height: 100%;
+}
+
+.category:not(:last-child) {
+  @apply md:mr-10;
+}
+
+.imgDiv {
+    height: 80%;
+    overflow: hidden;
+}
+
+.categoryImg{
+    transition: transform .8s;
+}
+
+.categoryImg:hover {
+    transform: scale(1.05);
+}
+
+.floatBottom {
+    @apply absolute bottom-0 w-full;
+}
+
+.floatTop {
+    @apply absolute top-0 w-full;
+}
+
+.descriptionDiv{
+    @apply p-10 md:p-0 md:pt-4 py-4;
+    height: 20%;
+}
+
+.categoryTitle {
+    @apply text-center text-xl font-bold mb-4;
+}
+
+.categoryDesc {
+
+}

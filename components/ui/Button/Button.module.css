@@ -2,14 +2,14 @@
   @apply bg-accent-9 text-accent-0 cursor-pointer inline-flex
   px-10 py-5 leading-6 transition ease-in-out duration-150
   shadow-sm text-center justify-center uppercase
-  border border-transparent items-center text-sm font-semibold
+  border border-transparent items-center text-sm font-bold
   tracking-wide;
   max-height: 64px;
 }
 
-.root:hover {
+/* .root:hover {
   @apply border-accent-9 bg-accent-6;
-}
+} */
 
 .root:focus {
   @apply shadow-outline-normal outline-none;
@@ -31,8 +31,19 @@
   @apply border border-accent-2 bg-accent-0 text-accent-9 text-sm;
 }
 
+
 .ghost:hover {
   @apply border-accent-9 bg-accent-9 text-accent-0;
+}
+
+.slide {
+  @apply mt-8 border-4 border-white font-semibold;
+  transition: transform .8s;
+}
+
+.slide:hover {
+  @apply border-4 border-white font-bold;
+  transform: scale(1.05);
 }
 
 .naked {

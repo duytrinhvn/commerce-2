@@ -1,4 +1,20 @@
 .root {
+  @apply relative flex flex-row items-center overflow-hidden py-0;
+  max-height: 320px;
+}
+
+.root > div {
+  max-height: 320px;
+  padding: 0;
+  margin: 0px;
+  min-width: 0px;
+}
+
+.root > div > * > *:nth-child(2) * {
+  max-height: 100%;
+}
+
+/* .root {
   @apply w-full min-w-full relative flex flex-row items-center overflow-hidden py-0;
   max-height: 320px;
 }
@@ -11,12 +27,12 @@
 
 .root > div > * > *:nth-child(2) * {
   max-height: 100%;
-}
+} */
 
-.primary {
+/* .primary {
   @apply bg-accent-0;
 }
 
 .secondary {
   @apply bg-accent-9;
-}
+} */

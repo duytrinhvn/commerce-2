@@ -1,5 +1,5 @@
 .root {
-  @apply grid grid-cols-1 gap-0;
+  @apply grid grid-cols-1 gap-0 md:mx-14;
 
   @screen lg {
     @apply grid-cols-3 grid-rows-2;
