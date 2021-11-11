@@ -33,7 +33,7 @@ const ProductSidebar: FC<ProductSidebarProps> = ({
 
   const variant = getProductVariant(product, selectedOptions)
 
-  const price = variant.listPrice
+  const price = variant?.listPrice
 
   setProductPrice(price)
 
