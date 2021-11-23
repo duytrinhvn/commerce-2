@@ -16,6 +16,7 @@ import CheckoutSidebarView from '@components/checkout/CheckoutSidebarView'
 
 import LoginView from '@components/auth/LoginView'
 import s from './Layout.module.css'
+import MobileSidebarView from '../UserNav/MobileSidebarView'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -49,6 +50,12 @@ interface Props {
   }
 }
 
+const MobileView = () => {
+  return (
+    <div>Mobile View</div>
+  )
+}
+
 const ModalView: FC<{ modalView: string; closeModal(): any }> = ({
   modalView,
   closeModal,
@@ -79,6 +86,7 @@ const SidebarView: FC<{ sidebarView: string; closeSidebar(): any }> = ({
       {sidebarView === 'CHECKOUT_VIEW' && <CheckoutSidebarView />}
       {sidebarView === 'PAYMENT_VIEW' && <PaymentMethodView />}
       {sidebarView === 'SHIPPING_VIEW' && <ShippingView />}
+      {sidebarView === "MOBILE_VIEW" && <MobileSidebarView />}
     </Sidebar>
   )
 }

@@ -19,7 +19,9 @@ const Slide = ({ title, description, href, backgroundImageSrc }) => {
           {title}
         </h1>
         <p className="text-xl md:text-2xl">{description}</p>
-        <Button variant="slide">SEE MORE</Button>
+        <Button Component="a" href={href} variant="slide">
+          SEE MORE
+        </Button>
       </div>
     </div>
   )

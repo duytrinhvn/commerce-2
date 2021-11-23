@@ -50,7 +50,7 @@ const MainSlider = () => {
           title="Deskmat For Gamers"
           description="High Quality Deskmat For Improving Gaming Experience"
           backgroundImageSrc="/assets/monster-art-slide.jpg"
-          href="/search/collection/some-collection"
+          href="/search/deskmats"
         />
       </div>
       {slider && (

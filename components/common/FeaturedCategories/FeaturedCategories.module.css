@@ -19,6 +19,7 @@
 }
 
 .categoryImg{
+    object-fit: cover;
     transition: transform .8s;
 }
 

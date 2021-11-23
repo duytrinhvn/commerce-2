@@ -16,7 +16,7 @@ const initialState = {
   displayModal: false,
   modalView: 'LOGIN_VIEW',
   sidebarView: 'CART_VIEW',
-  userAvatar: '',
+  userAvatar: ''
 }
 
 type Action =
@@ -69,62 +69,62 @@ function uiReducer(state: State, action: Action) {
     case 'OPEN_SIDEBAR': {
       return {
         ...state,
-        displaySidebar: true,
+        displaySidebar: true
       }
     }
     case 'CLOSE_SIDEBAR': {
       return {
         ...state,
-        displaySidebar: false,
+        displaySidebar: false
       }
     }
     case 'OPEN_DROPDOWN': {
       return {
         ...state,
-        displayDropdown: true,
+        displayDropdown: true
       }
     }
     case 'CLOSE_DROPDOWN': {
       return {
         ...state,
-        displayDropdown: false,
+        displayDropdown: false
       }
     }
     case 'OPEN_MODAL': {
       return {
         ...state,
         displayModal: true,
-        displaySidebar: false,
+        displaySidebar: false
       }
     }
     case 'CLOSE_MODAL': {
       return {
         ...state,
-        displayModal: false,
+        displayModal: false
       }
     }
     case 'SET_MODAL_VIEW': {
       return {
         ...state,
-        modalView: action.view,
+        modalView: action.view
       }
     }
     case 'SET_SIDEBAR_VIEW': {
       return {
         ...state,
-        sidebarView: action.view,
+        sidebarView: action.view
       }
     }
     case 'SET_USER_AVATAR': {
       return {
         ...state,
-        userAvatar: action.value,
+        userAvatar: action.value
       }
     }
   }
 }
 
-export const UIProvider: FC = (props) => {
+export const UIProvider: FC = props => {
   const [state, dispatch] = React.useReducer(uiReducer, initialState)
 
   const openSidebar = useCallback(
@@ -193,7 +193,7 @@ export const UIProvider: FC = (props) => {
       closeModal,
       setModalView,
       setSidebarView,
-      setUserAvatar,
+      setUserAvatar
     }),
     [state]
   )
@@ -211,6 +211,7 @@ export const useUI = () => {
 
 export const ManagedUIContext: FC = ({ children }) => (
   <UIProvider>
-    <ThemeProvider>{children}</ThemeProvider>
+    {/* <ThemeProvider>{children}</ThemeProvider> */}
+    {children}
   </UIProvider>
 )

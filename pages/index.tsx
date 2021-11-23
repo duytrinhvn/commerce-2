@@ -5,6 +5,7 @@ import { Grid, Marquee, Hero, Separator, CollectionCard } from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 import { getProductTypes } from '@framework/utils'
+import { Sidebar } from '@components/ui'
 
 export async function getStaticProps({
   preview,
@@ -43,7 +44,7 @@ export default function Home({
   categories,
   collections
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  // console.log(collections);
+
   return (
     <>
       <MainSlider />
@@ -97,6 +98,7 @@ export default function Home({
           }
         })}
       </Grid>
+      
     </>
   )
 }

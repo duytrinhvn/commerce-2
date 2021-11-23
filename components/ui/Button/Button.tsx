@@ -32,6 +32,7 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     disabled = false,
     style = {},
     Component = 'button',
+    href,
     ...rest
   } = props
   const ref = useRef<typeof Component>(null)
@@ -48,7 +49,6 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
     },
     className
   )
-
   return (
     <Component
       aria-pressed={active}
@@ -58,8 +58,9 @@ const Button: React.FC<ButtonProps> = forwardRef((props, buttonRef) => {
       disabled={disabled}
       style={{
         width,
-        ...style,
+        ...style
       }}
+      href={href}
       {...rest}
     >
       {children}

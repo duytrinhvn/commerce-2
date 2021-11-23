@@ -50,21 +50,20 @@ export default function Search({
   const { pathname, category, brand, collection } = useSearchMeta(asPath)
 
   const activeCategory = categories.find((cat: any) => cat.slug === category)
+
   const activeBrand = brands.find(
     (b: any) => getSlug(b.node.path) === `brands/${brand}`
   )?.node
 
-  let activeCollection: any | null = null;
-
-  if(collection) {
-    activeCollection = productTypes.find((type: any) => {
-      return type.slug === collection
-    })
-  }
+  let activeCollection: any | null = productTypes.find((c) => c.slug === collection)
+  // if (collection) {
+  //   activeCollection = productTypes.find((type: any) => {
+  //     return type.slug === collection
+  //   })
+  // }
 
   const { data } = useSearch({
-    // search: typeof q === 'string' ? 'q' : '',
-    search: collection ? collection : '',
+    search: collection ? collection : typeof q === 'string' ? q : '',
     categoryId: activeCategory?.id,
     brandId: (activeBrand as any)?.entityId,
     sort: typeof sort === 'string' ? sort : '',
@@ -79,7 +78,6 @@ export default function Search({
     }
     setActiveFilter(filter)
   }
-
 
   return (
     <Container>
@@ -189,15 +187,15 @@ export default function Search({
               <span className="rounded-md shadow-sm">
                 <button
                   type="button"
-                  onClick={e => handleClick(e, 'collection')}
+                  onClick={e => handleClick(e, 'collections')}
                   className="flex justify-between w-full rounded-sm border border-accent-3 px-4 py-3 bg-accent-0 text-sm leading-5 font-medium text-accent-4 hover:text-accent-5 focus:outline-none focus:border-blue-300 focus:shadow-outline-normal active:bg-accent-1 active:text-accent-8 transition ease-in-out duration-150"
                   id="options-menu"
                   aria-haspopup="true"
                   aria-expanded="true"
                 >
-                  {activeCollection?.node
-                    ? `Category: ${activeCollection?.node}`
-                    : 'All Categories'}
+                  {activeCollection?.name
+                    ? `Category: ${activeCollection?.name}`
+                    : 'All Collections'}
                   <svg
                     className="-mr-1 ml-2 h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
@@ -246,32 +244,35 @@ export default function Search({
                         </a>
                       </Link>
                     </li>
-                    {productTypes.map((type: any) => (
-                      <li
-                        key={type.id}
-                        className={cn(
-                          'block text-sm leading-5 text-accent-4 hover:bg-accent-1 lg:hover:bg-transparent hover:text-accent-8 focus:outline-none focus:bg-accent-1 focus:text-accent-8',
-                          {
-                            underline: activeCollection?.id === type.id
-                          }
-                        )}
-                      >
-                        <Link
-                          href={{
-                            pathname: `/search/collections/${type.slug}`
-                          }}
-                        >
-                          <a
-                            onClick={e => handleClick(e, 'collections')}
-                            className={
-                              'block lg:inline-block px-4 py-2 lg:p-0 lg:my-2 lg:mx-4'
+                    {productTypes.map((type: any, i: number) => {
+                      if (i === 0) return null
+                      return (
+                        <li
+                          key={type.id}
+                          className={cn(
+                            'block text-sm leading-5 text-accent-4 hover:bg-accent-1 lg:hover:bg-transparent hover:text-accent-8 focus:outline-none focus:bg-accent-1 focus:text-accent-8',
+                            {
+                              underline: activeCollection?.id === type.id
                             }
+                          )}
+                        >
+                          <Link
+                            href={{
+                              pathname: `/search/collections/${type.slug}`
+                            }}
                           >
-                            {type.name}
-                          </a>
-                        </Link>
-                      </li>
-                    ))}
+                            <a
+                              onClick={e => handleClick(e, 'collections')}
+                              className={
+                                'block lg:inline-block px-4 py-2 lg:p-0 lg:my-2 lg:mx-4'
+                              }
+                            >
+                              {type.name}
+                            </a>
+                          </Link>
+                        </li>
+                      )
+                    })}
                   </ul>
                 </div>
               </div>

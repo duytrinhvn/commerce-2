@@ -6,7 +6,7 @@ const CollectionCard = ({ collection }) => {
   console.log('COLLECTION', collection)
   return (
     <Link
-      href={`/search/${collection.slug}`}
+      href={`/search/collections/${collection.slug}`}
       className={s.root}
       style={{
         backgroundImage: `url('/assets/${collection.slug}.jpg')`
