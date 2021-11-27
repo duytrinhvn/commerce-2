@@ -78,7 +78,7 @@ const CartItem = ({
   return (
     <li
       className={cn(s.root, {
-        'opacity-50 pointer-events-none': removing,
+        'opacity-50 pointer-events-none': removing
       })}
       {...rest}
     >
@@ -110,7 +110,7 @@ const CartItem = ({
             </a>
           </Link>
           {options && options.length > 0 && (
-            <div className="flex items-center pb-1">
+            <div className="flex flex-col items-start pb-1">
               {options.map((option: ItemOption, i: number) => (
                 <div
                   key={`${item.id}-${option.name}`}
@@ -119,11 +119,13 @@ const CartItem = ({
                   {option.name}
                   {option.name === 'Color' ? (
                     <span
-                      className="mx-2 rounded-full bg-transparent border w-5 h-5 p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden"
-                      style={{
-                        backgroundColor: `${option.value}`,
-                      }}
-                    ></span>
+                      className="mx-2 rounded-full bg-transparent border h-5 p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden"
+                      // style={{
+                      //   backgroundColor: `${option.value}`,
+                      // }}
+                    >
+                      {option.value}
+                    </span>
                   ) : (
                     <span className="mx-2 rounded-full bg-transparent border h-5 p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden">
                       {option.value}

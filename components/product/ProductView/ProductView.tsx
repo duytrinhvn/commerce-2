@@ -10,6 +10,7 @@ import { ProductSlider, ProductCard } from '@components/product'
 import { Container, Text } from '@components/ui'
 import ProductSidebar from '../ProductSidebar'
 import ProductTag from '../ProductTag'
+import { useSlideContext } from '../context'
 interface ProductViewProps {
   product: Product
   relatedProducts: Product[]
@@ -18,13 +19,25 @@ interface ProductViewProps {
 const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
   const [productPrice, setProductPrice] = useState<string>()
 
+  // const [currentSlideImageIndex, setCurrentSlideImageIndex] = useState(1)
+
   const { price } = usePrice({
     amount: product.price.value,
     baseAmount: product.price.retailPrice,
-    currencyCode: product.price.currencyCode!,
+    currencyCode: product.price.currencyCode!
   })
 
-  const dollarSign = ( product.price?.currencyCode === 'USD' || product.price?.currencyCode === 'CAD' ) ? '$' : '' 
+  const { setSlideImages } = useSlideContext()
+
+  useEffect(() => {
+    setSlideImages(product.images)
+  }, [setSlideImages, product])
+
+  const dollarSign =
+    product.price?.currencyCode === 'USD' ||
+    product.price?.currencyCode === 'CAD'
+      ? '$'
+      : ''
 
   useEffect(() => {
     setProductPrice(price)
@@ -42,12 +55,12 @@ const ProductView: FC<ProductViewProps> = ({ product, relatedProducts }) => {
             />
             <div className={s.sliderContainer}>
               <ProductSlider key={product.id}>
-                {product.images.map((image, i) => (
+                {product.images.map((image: any, i) => (
                   <div key={image.url} className={s.imageContainer}>
                     <Image
                       className={s.img}
                       src={image.url!}
-                      alt={image.alt || 'Product Image'}
+                      alt={image.altText || 'Product Image'}
                       width={600}
                       height={600}
                       priority={i === 0}

@@ -5,12 +5,13 @@ import React, {
   isValidElement,
   useState,
   useRef,
-  useEffect,
+  useEffect
 } from 'react'
 import cn from 'classnames'
 import { a } from '@react-spring/web'
 import s from './ProductSlider.module.css'
 import ProductSliderControl from '../ProductSliderControl'
+import { useSlideContext } from '../context'
 
 interface ProductSliderProps {
   children: React.ReactNode[]
@@ -19,7 +20,7 @@ interface ProductSliderProps {
 
 const ProductSlider: React.FC<ProductSliderProps> = ({
   children,
-  className = '',
+  className = ''
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isMounted, setIsMounted] = useState(false)
@@ -33,7 +34,6 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
     slideChanged(s) {
       const slideNumber = s.details().relativeSlide
       setCurrentSlide(slideNumber)
-
       if (thumbsContainerRef.current) {
         const $el = document.getElementById(
           `thumb-${s.details().relativeSlide}`
@@ -44,8 +44,16 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
           thumbsContainerRef.current.scrollLeft = 0
         }
       }
-    },
+    }
   })
+
+  const { setSlider } = useSlideContext()
+
+  useEffect(() => {
+    setSlider(slider)
+  }, [setSlider, slider])
+
+  // slider && slider.moveToSlideRelative(slide)
 
   // Stop the history navigation gesture on touch devices
   useEffect(() => {
@@ -87,7 +95,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
         className={cn(s.slider, { [s.show]: isMounted }, 'keen-slider')}
       >
         {slider && <ProductSliderControl onPrev={onPrev} onNext={onNext} />}
-        {Children.map(children, (child) => {
+        {Children.map(children, child => {
           // Add the keen-slider__slide className to children
           if (isValidElement(child)) {
             return {
@@ -96,8 +104,8 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                 ...child.props,
                 className: `${
                   child.props.className ? `${child.props.className} ` : ''
-                }keen-slider__slide`,
-              },
+                }keen-slider__slide`
+              }
             }
           }
           return child
@@ -113,13 +121,13 @@ const ProductSlider: React.FC<ProductSliderProps> = ({
                 props: {
                   ...child.props,
                   className: cn(child.props.className, s.thumb, {
-                    [s.selected]: currentSlide === idx,
+                    [s.selected]: currentSlide === idx
                   }),
                   id: `thumb-${idx}`,
                   onClick: () => {
                     slider.moveToSlideRelative(idx)
-                  },
-                },
+                  }
+                }
               }
             }
             return child
