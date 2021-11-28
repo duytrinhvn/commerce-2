@@ -8,8 +8,6 @@ export default function SlideProvider({ children }) {
   const [slider, setSlider] = useState()
   const [slideImages, setSlideImages] = useState()
 
-  console.log(slideImages)
-
   const moveToSlide = (slideIndex, colorName) => {
     const colorNameLower = colorName.toLowerCase()
     // console.log(colorNameLower)

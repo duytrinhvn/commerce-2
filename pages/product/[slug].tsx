@@ -8,6 +8,8 @@ import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
 import SlideProvider from '@components/product/context'
+import { getProductsByCollectionHandle } from '@framework/utils'
+
 
 export async function getStaticProps({
   params,
@@ -24,15 +26,19 @@ export async function getStaticProps({
     preview,
   })
 
-  const allProductsPromise = commerce.getAllProducts({
-    variables: { first: 4 },
-    config,
-    preview,
-  })
+  // const allProductsPromise = commerce.getAllProducts({
+  //   variables: { first: 4 },
+  //   config,
+  //   preview,
+  // })
   const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
   const { product } = await productPromise
-  const { products: relatedProducts } = await allProductsPromise
+
+  // Get all products in same category, then return 4
+  const products = await getProductsByCollectionHandle()
+  // const { products: relatedProducts } = await allProductsPromise
+
 
   if (!product) {
     throw new Error(`Product with slug '${params!.slug}' not found`)
@@ -42,10 +48,10 @@ export async function getStaticProps({
     props: {
       pages,
       product,
-      relatedProducts,
-      categories,
+      relatedProducts: products,
+      categories
     },
-    revalidate: 200,
+    revalidate: 200
   }
 }
 

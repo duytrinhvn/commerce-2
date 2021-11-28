@@ -10,6 +10,7 @@ export { default as checkoutToCart } from './checkout-to-cart'
 export { default as handleLogin, handleAutomaticLogin } from './handle-login'
 export { default as handleAccountActivation } from './handle-account-activation'
 export { default as throwUserErrors } from './throw-user-errors'
+export { default as getProductsByCollectionHandle } from "./get-products-by-collection-handle"
 export * from './queries'
 export * from './mutations'
 export * from './normalize'
