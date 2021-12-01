@@ -3,7 +3,7 @@ import { productConnectionFragment } from './get-all-products-query'
 const getCollectionByHandle = `
 query getCollectionByHandle($handle:String = "deskmats") {
   collectionByHandle(handle: $handle) {
-    products(first: 4, sortKey: CREATED, reverse: true) {
+    products(first: 20, sortKey: CREATED, reverse: true) {
         ...productConnection
     }
   }
