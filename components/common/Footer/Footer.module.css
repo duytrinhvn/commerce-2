@@ -11,3 +11,31 @@
     @apply scale-110;
   }
 }
+
+.input {
+  @apply h-10 p-3;
+  flex: 5;
+  border: 1px solid;
+  border-color: lightgray;
+  border-right: 0px;
+  /* border-radius: 6px; */
+}
+
+.sendButton {
+  @apply bg-gray-300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sendButton:hover {
+  @apply bg-accent-9;
+
+  & .sendIcon {
+    color: white;
+  }
+}
+
+.sendIcon {
+  height: 25px
+}
